@@ -2,6 +2,31 @@ var express = require('express');
 var router = express.Router();
 const {imgFolder} = require('./constant');
 
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '/Users/pc/Documents/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+
+var upload = multer({ storage: storage }).single('image');
+router.post('/profile', function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            // An error occurred when uploading 
+            res.send(err);
+            return;
+        }
+        res.send(req.file.path);
+        return;
+        // Everything went fine 
+    });
+    
+});
+
 router.get('/:name', function(req, res, next) {
 
     //test download 
@@ -46,7 +71,7 @@ router.post('/fileupload/progress', function(req, res, next) {
     form.parse(req, function (err, fields, files) {
         var oldpath = files.filetoupload.path;
 
-        var newpath = '/Users/macbook/Documents/uploadFile/' + files.filetoupload.name;
+        var newpath = '/Users/pc/Documents/images /' + files.filetoupload.name;
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
             res.write('File uploaded and moved!');

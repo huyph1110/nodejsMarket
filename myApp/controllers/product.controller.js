@@ -25,3 +25,37 @@ exports.create = function (req, res) {
         }
     });
 };
+
+exports.update = function(req, res){
+    return res.send(req.body);
+    Product.findById(req.body.ProductTypeId, function (err, product) {
+        if (!err) {
+            return res.send(err);
+        } 
+        if (!product) {
+            return res.send("Not found product with id");
+        }
+
+        product.productName = req.body.productName;
+        product.price = req.body.price;
+        product.ProductTypeId = req.body.ProductTypeId;
+        product.SupplierId = req.body.SupplierId;
+        product.Decription = req.body.Decription;
+        product.Status = req.body.Status;
+        product.Stock = req.body.Stock;
+        product.ImageUrl = req.body.ImageUrl;
+
+        Product.save(function (err, data) {
+            if (err) {
+                console.log(err);
+                res.status(500).send({ message: "Some error occurred while update the Product." });
+            } else {
+                res.send(data);
+            }
+        });
+        //
+    });
+};
+
+
+// PUT, DELETE, POST

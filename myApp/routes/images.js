@@ -75,7 +75,7 @@ router.post('/fileupload/progress', function(req, res, next) {
 
         var oldpath = files.csv.path;
 
-        var newpath = './images/' + files.csv.name;
+        var newpath = '/root/nodjsServer/nodejsMarket/images/' + files.csv.name;
         // if (fs.existsSync(path)) {
         //     newpath = './images/' + files.csv.name + file.csv.mtime;
         //     fs.rename(oldpath, newpath, function (err) {

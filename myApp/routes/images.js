@@ -75,20 +75,15 @@ router.post('/fileupload/progress', function(req, res, next) {
 
         var oldpath = files.csv.path;
 
-<<<<<<< HEAD
-        var newpath = '/Users/pc/Documents/images /' + files.filetoupload.name;
-        fs.rename(oldpath, newpath, function (err) {
-=======
-        var newpath = '/Users/macbook/Documents/uploadFile/' + files.csv.name;
+        var newpath = './images/' + files.csv.name;
         if (fs.existsSync(path)) {
-            newpath = '/Users/macbook/Documents/uploadFile/' + files.csv.name + file.csv.mtime;
+            newpath = './images/' + files.csv.name + file.csv.mtime;
             fs.rename(oldpath, newpath, function (err) {
               if (err) throw err;
               res.send(files.csv.name + file.csv.mtime)
               });
         }
         else fs.rename(oldpath, newpath, function (err) {
->>>>>>> ac8a9520100ff540a975b9efe8f6e542e1cc1a34
             if (err) throw err;
             res.send(files.csv.name)
         });

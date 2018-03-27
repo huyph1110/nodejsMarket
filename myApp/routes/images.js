@@ -43,15 +43,26 @@ router.get('/fileupload/upload', function(req, res, next) {
 router.post('/fileupload/progress', function(req, res, next) {
 
     var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-        var oldpath = files.filetoupload.path;
 
-        var newpath = '/Users/macbook/Documents/uploadFile/' + files.filetoupload.name;
-        fs.rename(oldpath, newpath, function (err) {
+
+    form.parse(req, function (err, fields, files) {
+        //res.send(files)
+
+        var oldpath = files.csv.path;
+
+        var newpath = '/Users/macbook/Documents/uploadFile/' + files.csv.name;
+        if (fs.existsSync(path)) {
+            newpath = '/Users/macbook/Documents/uploadFile/' + files.csv.name + file.csv.mtime;
+            fs.rename(oldpath, newpath, function (err) {
+              if (err) throw err;
+              res.send(files.csv.name + file.csv.mtime)
+              });
+        }
+        else fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
-            res.write('File uploaded and moved!');
-            res.end();
+            res.send(files.csv.name)
         });
     });
 });
+
 module.exports = router;

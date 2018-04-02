@@ -110,10 +110,10 @@ router.post('/fileupload/progress', function(req, res, next) {
 
             
 
-
-            res.status(200).json(
-                [{message: files.csv.name}]
-            );
+            res.status(200).send([{name: files.csv.name}]);
+            // res.status(200).json(
+            //     [{name: files.csv.name}]
+            // );
             
         });   
     });

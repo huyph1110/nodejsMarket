@@ -12,6 +12,8 @@ var good = require('./routes/good');
 var images = require('./routes/images');  
 var app = express();
 
+var cors = require('cors')
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -24,6 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(stylus.middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
+
 // connect db
 
 app.use('/', index);

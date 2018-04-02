@@ -37,9 +37,11 @@ router.post('/profile', function (req, res) {
             res.send(err);
             return;
         }
+
         res.status(200).json(
-            [{ message: files.csv.name }]
+            [{ message: req.files.csv.name }]
         );
+        
         return;
         // Everything went fine 
     });

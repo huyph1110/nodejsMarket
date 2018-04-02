@@ -1,5 +1,33 @@
 var Product = require("../models/product.model.js");
 
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '/root/nodjsServer/nodejsMarket/images/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+
+var upload = multer({ storage: storage }).single('image');
+router.post('/profile', function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+            // An error occurred when uploading 
+            res.send(err);
+            return;
+        }
+        res.status(200).json(
+            [{ message: files.csv.name }]
+        );
+        return;
+        // Everything went fine 
+    });
+
+});
+
+
 exports.create = function (req, res) {
     if (!req.body.productName) {
         return res.status(400).send({ message: "productName can not be empty" });
@@ -27,7 +55,7 @@ exports.create = function (req, res) {
 };
 
 exports.update = function(req, res){
-    return res.send(req.body);
+    
     Product.findById(req.body.ProductTypeId, function (err, product) {
         if (!err) {
             return res.send(err);
@@ -56,6 +84,5 @@ exports.update = function(req, res){
         //
     });
 };
-
 
 // PUT, DELETE, POST

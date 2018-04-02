@@ -1,34 +1,4 @@
 var Product = require("../models/product.model.js");
-var express = require('express');
-var router = express.Router();
-var multer = require('multer');
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '/root/nodjsServer/nodejsMarket/images')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-});
-
-var upload = multer({ storage: storage }).single('image');
-router.post('/profile', function (req, res) {
-    upload(req, res, function (err) {
-        if (err) {
-            // An error occurred when uploading 
-            res.send(err);
-            return;
-        }
-        res.status(200).json(
-            [{ message: files.csv.name }]
-        );
-        return;
-        // Everything went fine 
-    });
-
-});
-
-module.exports = router;
 
 exports.create = function (req, res) {
     if (!req.body.productName) {
@@ -86,5 +56,6 @@ exports.update = function(req, res){
         //
     });
 };
+
 
 // PUT, DELETE, POST

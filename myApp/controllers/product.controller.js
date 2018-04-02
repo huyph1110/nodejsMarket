@@ -1,5 +1,5 @@
 var Product = require("../models/product.model.js");
-
+var router = express.Router();
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {

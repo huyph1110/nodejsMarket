@@ -3,7 +3,7 @@ var Product = require("../models/product.model.js");
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/root/nodjsServer/nodejsMarket/images/images')
+        cb(null, '/root/nodjsServer/nodejsMarket/images')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)
@@ -27,6 +27,7 @@ router.post('/profile', function (req, res) {
 
 });
 
+module.exports = router;
 
 exports.create = function (req, res) {
     if (!req.body.productName) {

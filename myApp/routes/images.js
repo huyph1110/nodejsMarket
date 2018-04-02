@@ -103,6 +103,10 @@ router.post('/fileupload/progress', function(req, res, next) {
         // else
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
+
+            
+
+
             res.status(200).json(
                 [{message: files.csv.name}]
             );

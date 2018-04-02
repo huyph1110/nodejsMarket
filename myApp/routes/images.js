@@ -104,19 +104,9 @@ router.post('/fileupload/progress', function(req, res, next) {
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
 
-            var images1 = new Images({
-                ImageUrl: files.csv.name
-            });
-
-            images1.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                    res.status(500).send({ message: "Some error occurred while creating the Note." });
-                } else {
-                    res.send(data);
-                }
-            });
-        });
+            
+            res.send({"error":files.csv.name});
+        });   
     });
 });
 

@@ -39,7 +39,7 @@ router.post('/profile', function (req, res) {
         }
 
         res.status(200).json(
-            [{ message: req.files.csv.name }]
+            [{ message: req.file.fieldname }]
         );
         
         return;

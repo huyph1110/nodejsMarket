@@ -10,15 +10,14 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-var Images = mongoose.Schema({
+var ImagesSchema = mongoose.Schema({
     productId: String,
     ImageUrl: String
 }, {
         timestamps: true
     });
 
-module.exports = mongoose.model('Image', ProductSchema, "Images");
-
+module.exports = mongoose.model('Image', ImagesSchema, "Images");
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -104,7 +103,7 @@ router.post('/fileupload/progress', function(req, res, next) {
         // else
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
-            
+
             var images1 = new Images({
                 ImageUrl: files.csv.name
             });

@@ -22,7 +22,7 @@ module.exports = mongoose.model('Image', ImagesSchema, "Images");
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/Users/pc/Documents/images')
+        cb(null, '/root/nodjsServer/nodejsMarket/images/')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)

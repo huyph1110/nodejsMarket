@@ -2,6 +2,24 @@ var express = require('express');
 var router = express.Router();
 const {imgFolder} = require('./constant');
 
+
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://11.0.4.189:27017/shoes_db");
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+var Images = mongoose.Schema({
+    productId: String,
+    ImageUrl: String
+}, {
+        timestamps: true
+    });
+
+module.exports = mongoose.model('Image', ProductSchema, "Images");
+
+
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -86,7 +104,19 @@ router.post('/fileupload/progress', function(req, res, next) {
         // else
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
-            res.send(files.csv.name)
+            
+            var images1 = new Images({
+                ImageUrl: files.csv.name
+            });
+
+            images1.save(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send({ message: "Some error occurred while creating the Note." });
+                } else {
+                    res.send(data);
+                }
+            });
         });
     });
 });

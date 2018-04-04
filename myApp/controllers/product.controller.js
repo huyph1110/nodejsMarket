@@ -13,7 +13,8 @@ exports.create = function (req, res) {
         Decription: req.body.Decription,
         Status: req.body.Status,
         Stock: req.body.Stock,
-        ImageUrl: req.body.ImageUrl
+        ImageUrl: req.body.ImageUrl,
+        ColorName: req.body.ColorName
     });
 
     product1.save(function (err, data) {

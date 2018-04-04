@@ -18,7 +18,7 @@ router.get('/getAll', function(req, res, next) {
       console.log("Database created!");
       var dbo = db.db("shoes_db");
 
-      dbo.collection("products").find({}, { "sort": [['createdAt', 'asc']] } )
+      dbo.collection("products").find({}, { "sort": [['createdAt', 'desc']] } )
       .toArray(function(err, result) {
       if (err) throw err;
 

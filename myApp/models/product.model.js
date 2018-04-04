@@ -15,7 +15,8 @@ var ProductSchema = mongoose.Schema({
     Status: String,
     Stock: String,
     ImageUrl: String,
-    ColorId: String
+    ColorId: String,
+    ColorName: String
 }, {
         timestamps: true
     });

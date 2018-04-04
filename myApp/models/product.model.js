@@ -6,6 +6,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 var ProductSchema = mongoose.Schema({
+    productId:String,
     productName: String,
     price: Number,
     ProductTypeId: String,
@@ -18,5 +19,4 @@ var ProductSchema = mongoose.Schema({
 }, {
         timestamps: true
     });
-
 module.exports = mongoose.model('Product', ProductSchema,"products");

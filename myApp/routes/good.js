@@ -18,7 +18,8 @@ router.get('/getAll', function(req, res, next) {
       console.log("Database created!");
       var dbo = db.db("shoes_db");
 
-      dbo.collection("products").find().toArray(function(err, result) {
+      dbo.collection("products").find({}, { "sort": [['createdAt', 'asc']] } )
+      .toArray(function(err, result) {
       if (err) throw err;
 
       res.send(result);
@@ -57,3 +58,4 @@ router.post('/insert', function(req,res,next) {
 });
 
 module.exports = router;
+//GET DATA

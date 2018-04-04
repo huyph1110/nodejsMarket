@@ -83,7 +83,6 @@ router.get('/fileupload/upload', function(req, res, next) {
     res.write('<input type="submit">');
     res.write('</form>');
     return res.end();
-
 });
 
 router.post('/fileupload/progress', function(req, res, next) {
@@ -97,23 +96,10 @@ router.post('/fileupload/progress', function(req, res, next) {
         var oldpath = files.csv.path;
 
         var newpath = '/root/nodjsServer/nodejsMarket/images/' + files.csv.name;
-        // if (fs.existsSync(path)) {
-        //     newpath = './images/' + files.csv.name + file.csv.mtime;
-        //     fs.rename(oldpath, newpath, function (err) {
-        //       if (err) throw err;
-        //       res.send(files.csv.name + file.csv.mtime)
-        //       });
-        // }
-        // else
+        
         fs.rename(oldpath, newpath, function (err) {
             if (err) throw err;
-
-            
-
             res.status(200).send([{name: files.csv.name}]);
-            // res.status(200).json(
-            //     [{name: files.csv.name}]
-            // );
             
         });   
     });
